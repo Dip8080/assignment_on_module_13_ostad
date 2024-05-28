@@ -1,13 +1,22 @@
-import 'package:flutter/material.dart';
 
-class AddProductScreen extends StatefulWidget {
-  const AddProductScreen({super.key});
+import 'dart:convert';
+
+import 'package:assignment_on_module_13_ostad/features/Home/Presentaion/screen/Home.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+class UpdateProduct extends StatefulWidget {
+  const UpdateProduct(
+      {super.key, required this.productName, required this.productId});
+
+  final String productName;
+  final String productId;
 
   @override
-  State<AddProductScreen> createState() => _AddProductScreenState();
+  State<UpdateProduct> createState() => _UpdateProductState();
 }
 
-class _AddProductScreenState extends State<AddProductScreen> {
+class _UpdateProductState extends State<UpdateProduct> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _unitPriceController = TextEditingController();
   final TextEditingController _quantityController = TextEditingController();
@@ -17,19 +26,36 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
   @override
   Widget build(BuildContext context) {
-    void HandleAddProduct() {
+    void HandleUpdateProduct() async {
       Map produtData = {
-        'name': _nameController.text,
-        'unitPrice': _unitPriceController.text,
-        'quantity': _quantityController.text,
-        'totalPrice': _totalPriceController.text,
+        'ProductName': _nameController.text,
+        'UnitPrice': _unitPriceController.text,
+        'Qty': _quantityController.text,
+        'TotalPrice': _totalPriceController.text,
+        'Img' : _imageController.text
       };
       print(produtData);
+      var response = await http.post(
+          Uri.parse(
+              'https://crud.teamrabbil.com/api/v1/UpdateProduct/${widget.productId}'),
+          headers: {"Content-Type": "application/json"},
+          body: jsonEncode(produtData));
+      print('this is print in widget - ${response.body}');
+      if (response.statusCode == 200) {
+        print('Product data updated successfully ');
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return Home();
+        }));
+      } else {
+        throw Exception('Failed to update products');
+      }
     }
+
+    ;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add New Product'),
+        title: Text('update product - ${widget.productName}'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -105,10 +131,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      HandleAddProduct();
+                      HandleUpdateProduct();
                     }
                   },
-                  child: const Text('Add'),
+                  child: const Text('Update'),
                 )
               ],
             ),

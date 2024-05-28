@@ -3,13 +3,19 @@ import 'package:assignment_on_module_13_ostad/features/product/model/product.dar
 import 'package:http/http.dart' as http;
 
 Future<List<Product>> GetProductData() async {
-  var response = await http.get(Uri.parse('https://crud.teamrabbil.com/api/v1/ReadProduct'), headers: {"Content-Type": "application/json"});
-   if (response.statusCode == 200) {
+  var response = await http.get(
+      Uri.parse('https://crud.teamrabbil.com/api/v1/ReadProduct'),
+      headers: {"Content-Type": "application/json"});
+  if (response.statusCode == 200) {
     final data = json.decode(response.body);
-    final products = data['data'].map<Product>((json) => Product.fromJson(json)).toList();
+    final products =
+        data['data'].map<Product>((json) => Product.fromJson(json)).toList();
     print('Fetched products: $products');
     return products;
   } else {
     throw Exception('Failed to load products');
   }
 }
+
+// https://crud.teamrabbil.com/api/v1/UpdateProduct/${widget.product.id}
+// https://crud.teamrabbil.com/api/v1/DeleteProduct/$productId
