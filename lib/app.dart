@@ -14,7 +14,9 @@ class CrudApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Crud App',
         theme: _lightThemeData(),
+        // theme: _dartThemeData(),
         darkTheme: _dartThemeData(),
+        // system's theme- dark/light mode
         themeMode: ThemeMode.system,
         // home: const AddProductScreen(),
         home: const Home(),

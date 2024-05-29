@@ -27,7 +27,7 @@ class _UpdateProductState extends State<UpdateProduct> {
   @override
   Widget build(BuildContext context) {
     void HandleUpdateProduct() async {
-      Map produtData = {
+      Map<String , String> produtData = {
         'ProductName': _nameController.text,
         'UnitPrice': _unitPriceController.text,
         'Qty': _quantityController.text,

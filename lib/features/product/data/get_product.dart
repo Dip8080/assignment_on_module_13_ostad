@@ -19,3 +19,5 @@ Future<List<Product>> GetProductData() async {
 
 // https://crud.teamrabbil.com/api/v1/UpdateProduct/${widget.product.id}
 // https://crud.teamrabbil.com/api/v1/DeleteProduct/$productId
+// https://crud.teamrabbil.com/api/v1/CreateProduct
+// http?//crud.teamrabbil.com/api/v1/ReadProduct

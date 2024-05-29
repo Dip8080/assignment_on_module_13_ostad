@@ -10,13 +10,13 @@ final DateTime? createdDate;
 
   Product({
      this.id,
-     this.productName,
-     this.productCode,
-     this.img,
-     this.unitPrice,
-     this.qty,
-     this.totalPrice,
-     this.createdDate,
+      this.productName,
+      this.productCode,
+      this.img,
+      this.unitPrice,
+      this.qty,
+      this.totalPrice,
+      this.createdDate,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) {
