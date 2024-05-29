@@ -34,9 +34,10 @@ class _ProductListState extends State<ProductList> {
       print('this is print in widget - ${response.body}');
       if (response.statusCode == 200) {
         print('Product data removed successfully ');
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return Home();
-        }));
+        setState(() {});
+        // Navigator.push(context, MaterialPageRoute(builder: (context) {
+        //   return Home();
+        // }));
       } else {
         throw Exception('Failed to remove products');
       }
